@@ -134,7 +134,7 @@ export default function Home() {
                     rel="noopener noreferrer"
                 >
                     <GithubBrandIcon />
-                    This Websie is Open Source
+                    This Website is Open Source
                 </a>
             </footer>
         </div>
