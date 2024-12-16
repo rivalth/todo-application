@@ -2,9 +2,7 @@
 
 import { TaskItem } from "@/components/taskItem";
 import { Button } from "@/components/ui/button";
-import { GithubBrandIcon, TrashIcon } from "@/utils/icons";
-import { cn } from "@/utils/mergeClassName";
-import { Span } from "next/dist/trace";
+import { GithubBrandIcon } from "@/utils/icons";
 import { FormEvent, useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -112,7 +110,7 @@ export default function Home() {
                     <h2 className="text-2xl font-bold">Tasks</h2>
                     {tasks.length === 0 && (
                         <p className="text-gray-500 min-h-12 h-full w-full text-center justify-center flex items-center">
-                            You don't have any tasks yet
+                        {"You don't have any tasks yet"}
                         </p>
                     )}
                     <ul className="flex flex-col gap-4 mt-4">

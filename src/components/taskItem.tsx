@@ -1,6 +1,6 @@
 import { Task } from "@/app/page";
 import { cn } from "@/utils/mergeClassName";
-import { useRef, useState } from "react";
+import {  useState } from "react";
 import { motion, PanInfo, useMotionValue } from "motion/react";
 import { CompleteTaskIcon, TrashIcon } from "@/utils/icons";
 export const TaskItem = ({
@@ -33,7 +33,7 @@ export const TaskItem = ({
         setTaskDragMission("none");
     };
 
-    const handleOnDrag = (event: MouseEvent, info: PanInfo) => {
+    const handleOnDrag = () => {    
         const value = x.get();
         console.log("value", value);
         if (value > 15) {
