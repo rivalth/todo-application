@@ -65,25 +65,25 @@ export const TaskItem = ({
                 style={{
                     x,
                 }}
-                dragConstraints={{ left: 0, right: 0 }} // Sürükleme sınırları
-                dragElastic={0.1} // Esneklik
-                dragMomentum={false} // Momentum kapalı
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.1}
+                dragMomentum={false}
                 onDragStart={() => {
                     setTaskActive(true);
-                }} // Sürükleme başladığında görevi aktif yap
+                }}
                 onPanEnd={() => {
                     x.set(0);
                 }}
-                onDragEnd={handleDragEnd} // Sürükleme bırakılınca işlemleri yap
-                onDrag={handleOnDrag} // Drag mesafesini kaydet
+                onDragEnd={handleDragEnd}
+                onDrag={handleOnDrag}
                 whileTap={{
                     cursor: "grabbing",
                     boxShadow: "0px 1px 10px #00000020",
-                }} // Tıklanınca büyüt
+                }}
                 className={cn(
                     "flex items-center w-full bg-zinc-50 p-2 rounded-md relative z-[2] cursor-pointer outline outline-zinc-400/20 transition-outline",
                     taskDragMission == "compilation" && "outline-blue-500",
-                    taskDragMission == "deletion" && "outline-red-500",
+                    taskDragMission == "deletion" && "outline-red-500"
                 )}
             >
                 <button
@@ -99,7 +99,7 @@ export const TaskItem = ({
                     suppressContentEditableWarning={true}
                     ref={(el) => {
                         if (el) {
-                            el.innerText = task.value; // Initialize content
+                            el.innerText = task.value;
                         }
                     }}
                     onBlur={(e) => {
