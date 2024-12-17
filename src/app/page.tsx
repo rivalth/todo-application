@@ -22,8 +22,12 @@ export default function Home() {
         const inputValue = taskInput.trim();
         // clear the input field
         setTaskInput("");
-        if(inputValue === "") {
+        if (inputValue === "") {
             toast.error("You can't create an empty task");
+            return;
+        }
+        if (inputValue.length > 100) {
+            toast.error("Task can't be more than 100 characters");
             return;
         }
 
@@ -50,7 +54,13 @@ export default function Home() {
                 t.id === id ? { ...t, completed: !t.completed } : t
             );
         });
-        toast.info(`Task status changed to ${tasks.find((t) => t.id === id)?.completed ? "completed" : "uncompleted"}`);
+        toast.info(
+            `Task status changed to ${
+                tasks.find((t) => t.id === id)?.completed
+                    ? "completed"
+                    : "uncompleted"
+            }`
+        );
     };
 
     const deleteTask = (id: string) => {
@@ -61,6 +71,12 @@ export default function Home() {
 
     const updateTaskValue = (id: string, value: string) => {
         "use client";
+        if (value === "") {
+            deleteTask(id);
+        } else if (value.length > 100) {
+            toast.error("Task can't be more than 100 characters");
+            return;
+        }
         setTasks((prev) => {
             return prev.map((t) => (t.id === id ? { ...t, value } : t));
         });
@@ -81,15 +97,15 @@ export default function Home() {
     }, [tasks]);
 
     return (
-        <div className="grid grid-rows-[20px_1fr_20px] max-w-screen-sm mx-auto items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-            <main className="flex flex-col gap-8 row-start-2 justify-start h-full">
+        <div className="flex flex-col justify-between max-w-[475px] mx-auto min-h-screen pt-0 sm:pt-20 p-2 pb-20 gap-16 font-[family-name:var(--font-geist-sans)]">
+            <main className="flex flex-col gap-8 justify-start h-full items-center">
                 <h1 className="text-4xl font-bold text-center">
                     Managing Your Tasks
                 </h1>
 
                 <form
                     onSubmit={createTask}
-                    className="flex gap-4 items-center bg-zinc-100 inputShadow rounded-full outline-none focus:outline-orange-400"
+                    className="flex gap-4 items-center bg-zinc-100 inputShadow rounded-full outline-none focus:outline-orange-400 w-full"
                 >
                     <input
                         type="text"
@@ -106,11 +122,11 @@ export default function Home() {
                     </Button>
                 </form>
 
-                <div>
+                <div className="flex flex-col w-full gap-1">
                     <h2 className="text-2xl font-bold">Tasks</h2>
                     {tasks.length === 0 && (
                         <p className="text-gray-500 min-h-12 h-full w-full text-center justify-center flex items-center">
-                        {"You don't have any tasks yet"}
+                            {"You don't have any tasks yet"}
                         </p>
                     )}
                     <ul className="flex flex-col gap-4 mt-4">

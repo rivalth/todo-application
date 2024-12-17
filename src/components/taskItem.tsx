@@ -1,6 +1,6 @@
 import { Task } from "@/app/page";
 import { cn } from "@/utils/mergeClassName";
-import {  useState } from "react";
+import { useState } from "react";
 import { motion, useMotionValue } from "motion/react";
 import { CompleteTaskIcon, TrashIcon } from "@/utils/icons";
 export const TaskItem = ({
@@ -87,7 +87,7 @@ export const TaskItem = ({
                 )}
             >
                 <button
-                    className="inline-flex items-center mr-1 gap-2 border border-zinc-400 rounded-full w-6 h-6 justify-center cursor-pointer outline-none"
+                    className="inline-flex items-center w-[24px] h-[24px] mr-1 gap-2 border border-zinc-400 rounded-full justify-center cursor-pointer outline-none"
                     onClick={() => changeCompilation(task.id)}
                 >
                     {task.completed && (
@@ -102,13 +102,20 @@ export const TaskItem = ({
                             el.innerText = task.value;
                         }
                     }}
+                    onChange={(e) => {
+                        if (e.currentTarget.innerText.trim().length > 100) {
+                            e.preventDefault();
+                            e.currentTarget.innerText =
+                                e.currentTarget.innerText.slice(0, 100);
+                        }
+                    }}
                     onBlur={(e) => {
                         const value = e.currentTarget.innerText.trim(); // Avoid leading/trailing spaces
                         if (value !== task.value) {
                             updateTaskValue(task.id, value);
                         }
                     }}
-                    className="flex-1 outline-none p-1 rounded transition-all duration-200"
+                    className="flex-1 outline-none p-1 rounded max-w-full line-clamp-3 break-words transition-all duration-200"
                 >
                     {task.value}
                 </span>
