@@ -23,5 +23,5 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 -	[ ] Collection system allowing users to create separate categories (e.g., work, school) with customizable names, icons, and colors.
 -	[ ] Guest mode for task management without an account; account usage will be optional for saving tasks to the server and enabling synchronization.
 -	[ ] Recurring tasks functionality, allowing users to schedule tasks to repeat every specified interval (e.g., every day at a specific time for a set duration).
--	[ ] Notification system (list required notification use cases separately).
+-	[ ] Notification system.
 -	[ ] Desktop-ready application for download and offline usage.
