@@ -1,3 +1,4 @@
+
 import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
 
@@ -5,6 +6,8 @@ export const updateSession = async (request: NextRequest) => {
   // This `try/catch` block is only here for the interactive tutorial.
   // Feel free to remove once you have Supabase connected.
   try {
+    const headers = new Headers(request.headers);
+    headers.set("x-current-path", new URL(request.url).pathname);
     // Create an unmodified response
     let response = NextResponse.next({
       request: {
@@ -45,7 +48,11 @@ export const updateSession = async (request: NextRequest) => {
     }
 
     if (request.nextUrl.pathname === "/" && !user.error) {
-      return NextResponse.redirect(new URL("/protected", request.url));
+      return NextResponse.redirect(new URL("/collections", request.url));
+    }
+
+    if(["/sign-in", "/sign-up"].includes(request.nextUrl.pathname) && !user.error) {
+        return NextResponse.redirect(new URL("/collections", request.url));
     }
 
     return response;
@@ -60,3 +67,10 @@ export const updateSession = async (request: NextRequest) => {
     });
   }
 };
+
+export const config = {
+    matcher: [
+      // match all routes except static files and APIs
+      "/((?!api|_next/static|_next/image|favicon.ico).*)",
+    ],
+  };
